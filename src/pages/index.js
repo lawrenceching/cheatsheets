@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Input, AutoComplete, Row, Col, Divider } from 'antd';
+import { Input, AutoComplete, Row, Col } from 'antd';
 import {Component} from "react";
 
 // styles
@@ -78,7 +78,7 @@ class IndexPage extends Component {
                 return option.value.includes(this.state.keyword || '');
               })
               .map( option => {
-                return <Col id={option.value} className="gutter-row" span={12}>
+                return <Col key={option.value} className="gutter-row" span={12}>
                   <div>{option.value}</div>
                 </Col>
               })
