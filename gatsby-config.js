@@ -4,13 +4,13 @@ const googleTrackId = process.env['GOOGLE_TRACK_ID'];
 if(baiduTrackId === undefined) {
   console.warn('BAIDU_TRACK_ID is not defined');
 } else {
-  console.info('BAIDU_TRACK_ID is is set to', baiduTrackId);
+  console.info('BAIDU_TRACK_ID is set to', baiduTrackId);
 }
 
 if(googleTrackId === undefined) {
   console.warn('GOOGLE_TRACK_ID is not defined');
 } else {
-  console.info('GOOGLE_TRACK_ID is is set to', googleTrackId);
+  console.info('GOOGLE_TRACK_ID is set to', googleTrackId);
 }
 
 module.exports = {
