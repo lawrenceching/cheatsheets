@@ -1,5 +1,5 @@
 import React from "react"
-import {Card, Typography} from 'antd';
+import {Card, Typography, Breadcrumb} from 'antd';
 import {graphql} from "gatsby"
 import hastToHyperScript from 'hast-to-hyperscript'
 import hyperscript from 'hyperscript'
@@ -44,6 +44,12 @@ export default function Template({
   return (
       <div style={{margin: '2vw 8vw'}}>
 
+        <Breadcrumb>
+          <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
+          <Breadcrumb.Item>
+            <a href="./">{title}</a>
+          </Breadcrumb.Item>
+        </Breadcrumb>
         <Title>{title}</Title>
 
         <div className="masonry">
