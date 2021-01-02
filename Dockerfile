@@ -18,3 +18,10 @@ RUN ls -l /app/public
 
 FROM nginx:stable
 
+EXPOSE 80
+
+COPY --from=builder /app/public /var/www
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+
+CMD ["nginx"]
