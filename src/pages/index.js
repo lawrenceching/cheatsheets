@@ -19,18 +19,6 @@ const headingStyles = {
   maxWidth: 320,
 }
 
-const options = [
-  {
-    value: 'rsync',
-  },
-  {
-    value: 'macOS Terminal',
-  },
-  {
-    value: 'vi',
-  },
-];
-
 class IndexPage extends Component {
 
   constructor(props) {
@@ -48,7 +36,12 @@ class IndexPage extends Component {
   render() {
 
     const {data} = this.props;
-    console.log(data);
+
+    const options = data.allMarkdownRemark.edges.map(edge => {
+      return {
+        value: edge.node.frontmatter.title,
+      }
+    })
 
     return (
         <main style={pageStyles}>
@@ -100,7 +93,7 @@ class IndexPage extends Component {
                         }}
                   >
                     <Title
-                        level={5}>{option.title} - {option.description}</Title></Link>
+                        level={5}>{option.title}{option.description ? ` - ${option.description}` : ''}</Title></Link>
                 </Col>
               })
             }
