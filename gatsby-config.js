@@ -1,3 +1,5 @@
+const baiduTrackId = process.env['BAIDU_TRACK_ID'];
+
 module.exports = {
   siteMetadata: {
     title: "cheatsheets",
@@ -111,6 +113,15 @@ module.exports = {
             },
           },
         ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-baidu-analytics`,
+      options: {
+        // baidu analytics siteId
+        siteId: baiduTrackId,
+        // Put analytics script in the head instead of the body [default:false]
+        head: false,
       },
     },
   ],
