@@ -1,4 +1,13 @@
 const baiduTrackId = process.env['BAIDU_TRACK_ID'];
+const googleTrackId = process.env['GOOGLE_TRACK_ID'];
+
+if(baiduTrackId === undefined) {
+  console.warn('BAIDU_TRACK_ID is not defined');
+}
+
+if(googleTrackId === undefined) {
+  console.warn('BAIDU_TRACK_ID is not defined');
+}
 
 module.exports = {
   siteMetadata: {
@@ -10,7 +19,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
-        trackingId: "ABCD1234",
+        trackingId: googleTrackId,
       },
     },
     "gatsby-plugin-react-helmet",
