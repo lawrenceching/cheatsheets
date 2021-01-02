@@ -1,10 +1,12 @@
 import React from "react"
-import {Card, Typography, Breadcrumb} from 'antd';
+import {Row, Col, Typography, Breadcrumb, List} from 'antd';
 import {graphql} from "gatsby"
 import hastToHyperScript from 'hast-to-hyperscript'
 import hyperscript from 'hyperscript'
+import hastTableToJavaScriptTable from "../js/hast-table-to-javascript-table";
+import { stringify } from "../js/hast-table-to-javascript-table";
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
@@ -16,13 +18,11 @@ export default function Template({
 
   htmlAst.children.forEach(child => {
 
-    if (child.tagName === 'h2') {
+    if (child.tagName === 'h3') {
 
       const card = {
         title: null,
-        code: null,
-        className: null,
-        html: null,
+        rows: [],
       };
 
       card.title = child.children[0].value;
@@ -30,16 +30,34 @@ export default function Template({
       cards.push(card);
     }
 
+    const card = cards[cards.length - 1];
+
     if (child.tagName === 'div') {
-      // const code = child.children[0];
-      // const text = code.children[0];
-      const card = cards[cards.length - 1];
-      // card.className = code.properties.className;
-      // card.code = text.value;
       card.code = child;
-      card.html = hastToHyperScript(hyperscript, child);
+      card.rows.push({
+        type: 'html',
+        data: hastToHyperScript(hyperscript, child)
+      });
     }
-  })
+
+    if (child.tagName === 'table') {
+      const table = hastTableToJavaScriptTable(child);
+
+      table.rows.forEach((row) => {
+        card.rows.push({
+          type: 'two-column',
+          data: row
+        })
+      })
+    }
+
+    if (child.tagName === 'p') {
+      card.rows.push({
+        type: 'text',
+        data: stringify(child)
+      })
+    }
+  });
 
   return (
       <div style={{margin: '2vw 8vw'}}>
@@ -55,13 +73,39 @@ export default function Template({
         <div className="masonry">
           {
             cards.map(card => {
-              return <Card key={card.title}
-                           className="masonry-item"
-                           title={card.title}>
+              return <List
+                  className="masonry-item"
+                  key={card.title}
+                  size="small"
+                  header={<Text strong>{card.title}</Text>}
+                  bordered
+                  dataSource={card.rows}
+                  renderItem={row => (
+                      <List.Item>
+                        {
+                          row.type === 'html'
+                              ? <div dangerouslySetInnerHTML={{__html: row.data.outerHTML}}></div>
+                              : null
+                        }
 
-                <div dangerouslySetInnerHTML={{__html: card.html.outerHTML}}></div>
+                        {
+                          row.type === 'two-column'
+                              ? <Row style={{width: '100%'}}>
+                                <Col span={12}><Text>{row.data[0]}</Text></Col>
+                                <Col span={12} style={{textAlign: 'right'}}><Text type="secondary">{row.data[1]}</Text></Col>
+                              </Row>
+                              : null
+                        }
 
-              </Card>
+                        {
+                          row.type === 'text'
+                              ? <div>{row.data}</div>
+                              : null
+                        }
+
+                      </List.Item>
+                  )}
+              />
             })
           }
         </div>

@@ -3,7 +3,7 @@ title: rsync
 description: rsync cheatsheet，rsync 常用命令
 ---
 
-## 基础命令
+### 基础命令
 ```shell
 # 同步本地源目录到本地目标目录
 rsync -avz ./src /dest
@@ -11,7 +11,7 @@ rsync -avz ./src /dest
 rsync -avz ./src <username>@example.com:/dest
 ```
 
-## 显示信息
+### 显示信息
 ```shell
 -q, --quiet
 -v, --verbose
@@ -21,14 +21,14 @@ rsync -avz ./src <username>@example.com:/dest
 -P  # same as --partial --progress
 ```
 
-## macOS 相关设置
+### macOS 相关设置
 ```shell
 --exclude '.Trashes'
 --exclude '.Spotlight-V100'
 --exclude '.fseventsd'
 ```
 
-## 传输设置
+### 传输设置
 ```shell
 -z, --compress
 -n, --dry-run
@@ -36,7 +36,7 @@ rsync -avz ./src <username>@example.com:/dest
     --bwlimit=RATE    # 限制传输带宽
 ```
 
-## 跳过传输设置
+### 跳过传输设置
 ```shell
 # 对于一个文件，如果它在目标目录上新于源目录，则不再同步该文件
 -u, --update   
@@ -44,7 +44,7 @@ rsync -avz ./src <username>@example.com:/dest
 -c, --checksum
 ```
 
-## 包含/排除文件设置
+### 包含/排除文件设置
 ```shell
 --exclude=PATTERN
 --include=PATTERN
