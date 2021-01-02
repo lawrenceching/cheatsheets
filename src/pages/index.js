@@ -1,6 +1,9 @@
 import * as React from "react"
-import { Input, AutoComplete, Row, Col } from 'antd';
+import {Input, AutoComplete, Row, Col, Typography} from 'antd';
 import {Component} from "react";
+import {graphql, Link} from "gatsby";
+
+const {Title} = Typography;
 
 // styles
 const pageStyles = {
@@ -15,7 +18,6 @@ const headingStyles = {
   marginBottom: 64,
   maxWidth: 320,
 }
-
 
 const options = [
   {
@@ -40,10 +42,14 @@ class IndexPage extends Component {
   }
 
   onSearchChange(keyword) {
-    this.setState({ keyword})
+    this.setState({keyword})
   }
 
   render() {
+
+    const {data} = this.props;
+    console.log(data);
+
     return (
         <main style={pageStyles}>
           <title>CheatSheets</title>
@@ -61,11 +67,12 @@ class IndexPage extends Component {
               }}
               options={options}
               filterOption={(inputValue, option) =>
-                  option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                  option.value.toUpperCase().indexOf(inputValue.toUpperCase())
+                  !== -1
               }
               onChange={(keyword) => this.onSearchChange(keyword)}
           >
-            <Input.Search size="large" placeholder="搜索 ..." enterButton />
+            <Input.Search size="large" placeholder="搜索 ..." enterButton/>
           </AutoComplete>
 
           <div style={{height: '20px'}}/>
@@ -73,13 +80,27 @@ class IndexPage extends Component {
 
           <Row gutter={16}>
             {
-              options
-              .filter( option => {
-                return option.value.includes(this.state.keyword || '');
+              data.allMarkdownRemark.edges
+              .map(edge => {
+                return {
+                  title: edge.node.frontmatter.title,
+                  description: edge.node.frontmatter.description,
+                  url: edge.node.fields.slug
+                }
               })
-              .map( option => {
-                return <Col key={option.value} className="gutter-row" span={12}>
-                  <div>{option.value}</div>
+              .filter(option => {
+                return option.title.includes(this.state.keyword || '');
+              })
+              .map(option => {
+                return <Col key={option.title} className="gutter-row" span={24}>
+                  <Link to={option.url}
+                        style={{
+                          textDecoration: 'none',
+                          color: 'inherit'
+                        }}
+                  >
+                    <Title
+                        level={5}>{option.title} - {option.description}</Title></Link>
                 </Col>
               })
             }
@@ -91,3 +112,22 @@ class IndexPage extends Component {
 }
 
 export default IndexPage
+
+// language=graphql
+export const pageQuery = graphql`
+  query MyQuery {
+  allMarkdownRemark {
+    edges {
+      node {
+        frontmatter {
+          title
+          description
+        }
+        fields {
+          slug
+        }
+      }
+    }
+  }
+}
+`
