@@ -1,22 +1,28 @@
 import React from "react"
-import { Card, Row, Col} from 'antd';
-import { graphql } from "gatsby"
+import {Card, Typography} from 'antd';
+import {graphql} from "gatsby"
+import hastToHyperScript from 'hast-to-hyperscript'
+import hyperscript from 'hyperscript'
+
+const { Title } = Typography;
+
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
-  const { markdownRemark } = data // data.markdownRemark holds your post data
-  const { htmlAst } = markdownRemark
+  const {markdownRemark} = data // data.markdownRemark holds your post data
+  const {htmlAst} = markdownRemark
   const title = markdownRemark.frontmatter.title;
   const cards = [];
 
   htmlAst.children.forEach(child => {
 
-    if(child.tagName === 'h2') {
+    if (child.tagName === 'h2') {
 
       const card = {
         title: null,
         code: null,
         className: null,
+        html: null,
       };
 
       card.title = child.children[0].value;
@@ -24,31 +30,35 @@ export default function Template({
       cards.push(card);
     }
 
-    if(child.tagName === 'pre') {
-      const code = child.children[0];
-      const text = code.children[0];
+    if (child.tagName === 'div') {
+      // const code = child.children[0];
+      // const text = code.children[0];
       const card = cards[cards.length - 1];
-      card.className = code.properties.className;
-      card.code = text.value;
+      // card.className = code.properties.className;
+      // card.code = text.value;
+      card.code = child;
+      card.html = hastToHyperScript(hyperscript, child);
     }
   })
 
   return (
       <div style={{margin: '2vw 8vw'}}>
 
-        <h1>{title}</h1>
+        <Title>{title}</Title>
 
-        <Row gutter={16}>
+        <div className="masonry">
           {
             cards.map(card => {
-              return <Col key={card.title} span={12}>
-                <Card  title={card.title} style={{ width: '100%' }}>
-                  <pre><code className={card.className} >{card.code}</code></pre>
-                </Card>
-              </Col>
+              return <Card key={card.title}
+                           className="masonry-item"
+                           title={card.title}>
+
+                <div dangerouslySetInnerHTML={{__html: card.html.outerHTML}}></div>
+
+              </Card>
             })
           }
-        </Row>
+        </div>
 
 
       </div>

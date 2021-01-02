@@ -1,0 +1,36 @@
+
+/*.masonry {*/
+/*  display: flex;*/
+/*  flex-flow: column wrap;*/
+/*}*/
+
+/*.masonry-item:nth-child(3n+1) { order: 1; }*/
+/*.masonry-item:nth-child(3n+2) { order: 2; }*/
+/*.masonry-item:nth-child(3n)   { order: 3; }*/
+
+/*.masonry::before,*/
+/*.masonry::after {*/
+/*  content: "";*/
+/*  flex-basis: 100%;*/
+/*  width: 0;*/
+/*  order: 2;*/
+/*}*/
+
+.masonry {
+  columns: 2 auto;
+  column-gap: 2rem;
+}
+
+.masonry-item {
+  display: inline-block;
+  width: 550px;
+  margin: 0 1rem 1rem 0;
+}
+
+.masonry .ant-card-body {
+  padding: 5px;
+}
+
+.masonry pre[class*="language-"] {
+  padding: 0em 1em;
+}
