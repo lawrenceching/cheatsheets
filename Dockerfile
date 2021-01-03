@@ -14,8 +14,6 @@ RUN yarn
 COPY . .
 RUN yarn build
 
-RUN ls -l /app/public
-
 FROM nginx:stable
 
 EXPOSE 80
