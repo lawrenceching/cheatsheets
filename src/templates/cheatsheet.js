@@ -5,8 +5,15 @@ import hastToHyperScript from 'hast-to-hyperscript'
 import hyperscript from 'hyperscript'
 import hastTableToJavaScriptTable from "../js/hast-table-to-javascript-table";
 import { stringify } from "../js/hast-table-to-javascript-table";
+import Masonry from 'react-masonry-css'
 
 const { Title, Text } = Typography;
+
+const breakpointColumnsObj = {
+  default: 3,
+  2200: 2,
+  1100: 1
+};
 
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
@@ -70,11 +77,13 @@ export default function Template({
         </Breadcrumb>
         <Title>{title}</Title>
 
-        <div className="masonry">
+        <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="masonry-grid"
+            columnClassName="masonry-grid_column">
           {
             cards.map(card => {
               return <List
-                  className="masonry-item"
                   key={card.title}
                   size="small"
                   header={<Text strong>{card.title}</Text>}
@@ -84,7 +93,7 @@ export default function Template({
                       <List.Item>
                         {
                           row.type === 'html'
-                              ? <div dangerouslySetInnerHTML={{__html: row.data.outerHTML}}></div>
+                              ? <div style={{width: '100%', overflow: 'hidden'}} dangerouslySetInnerHTML={{__html: row.data.outerHTML}}></div>
                               : null
                         }
 
@@ -108,7 +117,8 @@ export default function Template({
               />
             })
           }
-        </div>
+
+        </Masonry>
 
 
       </div>
