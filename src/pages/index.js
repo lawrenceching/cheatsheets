@@ -8,9 +8,9 @@ const {Title} = Typography;
 // styles
 const pageStyles = {
   color: "#232129",
+  width: '80vw',
   paddingTop: "100px",
-  paddingLeft: "400px",
-  paddingRight: "400px",
+  margin: "0 auto",
   fontFamily: "-apple-system, Roboto, sans-serif, serif",
 }
 const headingStyles = {

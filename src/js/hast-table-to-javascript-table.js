@@ -1,18 +1,3 @@
-function findElementByTagName(hast, tagName) {
-  if(hast.tagName === tagName ){
-    return hast;
-  }
-
-  for (const child of hast.children) {
-    const r = findElementByTagName(child, tagName)
-    if(null != r) {
-      return r;
-    }
-  }
-
-  return null;
-}
-
 function stringify(e) {
 
   let str = '';
