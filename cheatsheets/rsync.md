@@ -1,6 +1,6 @@
 ---
 title: rsync
-description: rsync cheatsheet，rsync 常用命令
+description: rsync
 ---
 
 ### 基础命令
