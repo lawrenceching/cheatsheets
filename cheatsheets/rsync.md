@@ -1,5 +1,6 @@
 ---
 title: rsync
+description:
 ---
 
 ### 基础命令

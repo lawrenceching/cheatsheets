@@ -93,7 +93,7 @@ class IndexPage extends Component {
                         }}
                   >
                     <Title
-                        level={5}>{option.title}{option.description ? ` - ${option.description}` : ''}</Title></Link>
+                        level={5}>{option.title}</Title></Link>
                 </Col>
               })
             }
