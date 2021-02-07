@@ -115,6 +115,7 @@ export const pageQuery = graphql`
         frontmatter {
           title
           description
+          catalog
         }
         fields {
           slug

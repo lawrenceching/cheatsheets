@@ -23,6 +23,8 @@ export default function Template({
   const title = markdownRemark.frontmatter.title;
   const cards = [];
 
+  console.log(htmlAst);
+
   htmlAst.children.forEach(child => {
 
     if (child.tagName === 'h3') {

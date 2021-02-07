@@ -4,8 +4,8 @@ description:
 ---
 
 
-#### Sessions
-```bash
+### Sessions
+```shell
 # 创建新 Session
 tmux new 
 # 创建指定名称的新 Session
@@ -32,9 +32,9 @@ tmux kill-session -a
 tmux kill-session -a -t mysession
 ```
 
-#### Windows
+### Windows
 
-```bash
+```shell
 tmux new-window
 tmux new -s mysession -n mywindow
 Ctrl+b c
@@ -107,7 +107,7 @@ Ctrl+b 0..9
 
     Ctrl+b t    # Time
 
-## Status formats
+### Status formats
 
 ```
 setw -g window-status-format `#[fg=8,bg=default]#I`
@@ -150,7 +150,7 @@ See `message-command-style` in the man page.
 | `#T` | pane title |
 ```
 
-## Options
+### Options
 
 ```
 set -g status-justify [left|centre|right]
@@ -166,7 +166,7 @@ setw -g window-status-current-format
 setw -g window-status-separator
 ```
 
-## References
+### References
 
 https://tmuxcheatsheet.com/
 
