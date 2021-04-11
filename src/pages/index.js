@@ -3,7 +3,7 @@ import {Input, AutoComplete, Row, Col, Typography} from 'antd';
 import {Component} from "react";
 import {graphql, Link} from "gatsby";
 
-const {Title} = Typography;
+const {Title, Text} = Typography;
 
 // styles
 const pageStyles = {
@@ -46,13 +46,13 @@ class IndexPage extends Component {
     return (
         <main style={pageStyles}>
           <title>CheatSheets</title>
-          <h1 style={headingStyles}>
+          <div style={headingStyles}>
+            <h1>
             CheatSheets
-            <span role="img" aria-label="Party popper emojis">
-          🎉🎉🎉
-        </span>
-          </h1>
-
+            <span role="img" aria-label="Party popper emojis">🎉🎉🎉</span>
+            </h1>
+            <Text type="secondary">程序员常用命令速查手册</Text>
+          </div>
           <AutoComplete
               style={{
                 width: '100%',
