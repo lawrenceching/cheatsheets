@@ -27,6 +27,9 @@ ssh-copy-id -i ~/.ssh/id_rsa user@example.com
 # 手动添加公钥到服务器
 cat ~/.ssh/id_rsa.pub # 从本地公钥文件中复制密钥
 vi ~/.ssh/authorized_keys # 添加到服务器的 authorized_keys 文件中
+
+# 禁用 Host Key 校验
+ssh -o StrictHostKeyChecking=no ...
 ```
 
 ### 文件权限
@@ -52,4 +55,9 @@ ssh -N -R *:80:localhost:8080 user@example.com
 
 # 动态端口转发（HTTP 代理）
 ssh -D localhost:8080 user@example.com
+```
+
+### 执行命令
+```
+ssh user@example.com 'pwd'
 ```
