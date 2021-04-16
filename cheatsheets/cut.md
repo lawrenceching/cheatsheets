@@ -16,7 +16,7 @@ description: remove sections from each line of files
 echo 'a,b,c' | cut -d, -f1 #=> a
 echo 'a,b,c' | cut -d, -f2-3 #=> b c
 echo 'a,b,c' | cut -d, -f1,3 #=> a c
-echo 'a,b,c' | cut -d, -f1-3 --output-delimiter=_ #=> a_b_c
+echo 'a,b,c' | cut -d, -f1-3 --output-delimiter=_
 
 echo 'a b c' | cut -d' ' -f1 #=> a
 echo 'a b c' | cut -d' ' -f1 #=> a
@@ -28,7 +28,7 @@ a,b,c
 d,e,f
 g,h,i
 
-cut -d, -f1 list.txt #=> 
+cut -d, -f1 list.txt 
 a
 d
 g
@@ -41,7 +41,7 @@ a,b,c
 d,e,f
 g,h,i
 
-cut -d, -f1 list.txt #=> 
+cut -d, -f1 list.txt
 a
 
 d
