@@ -68,7 +68,13 @@ export default function Template({
     }
   });
 
-  const markedDescription = marked(description);
+  let markedDescription;
+  if(description !== null && description !== undefined) {
+    markedDescription = marked(description);
+  } else {
+    markedDescription = null;
+  }
+
 
   return (
       <div style={{margin: '2vw 8vw'}}>
@@ -87,7 +93,8 @@ export default function Template({
           </Breadcrumb.Item>
         </Breadcrumb>
         <Title>{title}</Title>
-        <Text type="secondary"><div type="secondary" dangerouslySetInnerHTML={{ __html: markedDescription}}/></Text>
+
+        { markedDescription !== null && <Text type="secondary"><div type="secondary" dangerouslySetInnerHTML={{ __html: markedDescription}}/></Text> }
 
         <Masonry
             breakpointCols={breakpointColumnsObj}
