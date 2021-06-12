@@ -5,6 +5,7 @@ import hastToHyperScript from 'hast-to-hyperscript'
 import hyperscript from 'hyperscript'
 import hastTableToJavaScriptTable from "../js/hast-table-to-javascript-table";
 import { stringify } from "../js/hast-table-to-javascript-table";
+import { Helmet } from "react-helmet"
 import Masonry from 'react-masonry-css'
 
 const { Title, Text } = Typography;
@@ -70,6 +71,11 @@ export default function Template({
 
   return (
       <div style={{margin: '2vw 8vw'}}>
+
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>{title} 速查手册</title>
+        </Helmet>
 
         <Breadcrumb>
           <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
