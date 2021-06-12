@@ -33,6 +33,7 @@
     "gatsby-transformer-remark": "^2.13.1",
     "hast-to-hyperscript": "^9.0.1",
     "hyperscript": "^2.0.2",
+    "marked": "^2.0.7",
     "prism-themes": "^1.5.0",
     "prismjs": "^1.23.0",
     "react": "^16.13.1",

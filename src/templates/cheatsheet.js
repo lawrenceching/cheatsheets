@@ -7,6 +7,7 @@ import hastTableToJavaScriptTable from "../js/hast-table-to-javascript-table";
 import { stringify } from "../js/hast-table-to-javascript-table";
 import { Helmet } from "react-helmet"
 import Masonry from 'react-masonry-css'
+import marked from 'marked'
 
 const { Title, Text } = Typography;
 
@@ -21,10 +22,8 @@ export default function Template({
 }) {
   const {markdownRemark} = data // data.markdownRemark holds your post data
   const {htmlAst} = markdownRemark
-  const title = markdownRemark.frontmatter.title;
+  const {title, description} = markdownRemark.frontmatter;
   const cards = [];
-
-  console.log(htmlAst);
 
   htmlAst.children.forEach(child => {
 
@@ -69,12 +68,16 @@ export default function Template({
     }
   });
 
+  const markedDescription = marked(description);
+
   return (
       <div style={{margin: '2vw 8vw'}}>
 
         <Helmet>
           <meta charSet="utf-8" />
+          <meta name="description" content={description} />
           <title>{title} 速查手册</title>
+          <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
         </Helmet>
 
         <Breadcrumb>
@@ -84,6 +87,7 @@ export default function Template({
           </Breadcrumb.Item>
         </Breadcrumb>
         <Title>{title}</Title>
+        <Text type="secondary"><div type="secondary" dangerouslySetInnerHTML={{ __html: markedDescription}}/></Text>
 
         <Masonry
             breakpointCols={breakpointColumnsObj}
@@ -142,6 +146,7 @@ export const pageQuery = graphql`
       }
       frontmatter {
         title
+        description
       }
     }
   }
