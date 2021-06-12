@@ -1,5 +1,6 @@
 ---
-title: macOS 终端快捷键 description:
+title: macOS 终端快捷键  
+description:
 ---
 
 ### 光标移动
