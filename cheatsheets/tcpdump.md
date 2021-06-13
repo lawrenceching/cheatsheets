@@ -57,7 +57,4 @@ not, !
 
 ### 引用链接
 
-```
-https://www.tcpdump.org/manpages/tcpdump.1.html
-https://linux.die.net/man/8/tcpdump
-```
+[Man page of TCPDUMP](https://www.tcpdump.org/manpages/tcpdump.1.html)

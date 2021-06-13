@@ -8,6 +8,7 @@ import { stringify } from "../js/hast-table-to-javascript-table";
 import { Helmet } from "react-helmet"
 import Masonry from 'react-masonry-css'
 import marked from 'marked'
+import {toHtml} from 'hast-util-to-html'
 
 const { Title, Text } = Typography;
 
@@ -61,9 +62,10 @@ export default function Template({
     }
 
     if (child.tagName === 'p') {
+      debugger;
       card.rows.push({
-        type: 'text',
-        data: stringify(child)
+        type: 'single-line-html',
+        data: toHtml(child)
       })
     }
   });
@@ -128,6 +130,12 @@ export default function Template({
                         {
                           row.type === 'text'
                               ? <div>{row.data}</div>
+                              : null
+                        }
+
+                        {
+                          row.type === 'single-line-html'
+                              ? <div dangerouslySetInnerHTML={{ __html: row.data}}/>
                               : null
                         }
 
