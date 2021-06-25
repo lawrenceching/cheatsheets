@@ -4,7 +4,6 @@ import {graphql} from "gatsby"
 import hastToHyperScript from 'hast-to-hyperscript'
 import hyperscript from 'hyperscript'
 import hastTableToJavaScriptTable from "../js/hast-table-to-javascript-table";
-import { stringify } from "../js/hast-table-to-javascript-table";
 import { Helmet } from "react-helmet"
 import Masonry from 'react-masonry-css'
 import marked from 'marked'
@@ -83,7 +82,10 @@ export default function Template({
 
         <Helmet>
           <meta charSet="utf-8" />
-          <meta name="description" content={description} />
+          {
+            description === null && <meta name="description" content={description} />
+          }
+          <meta name="keywords" content={`${title} Cheatsheet, ${title} 常用命令, ${title} 速查手册, ${title} 例子`} />
           <title>{title} 速查手册</title>
           <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
         </Helmet>
