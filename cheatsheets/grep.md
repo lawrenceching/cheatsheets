@@ -26,8 +26,8 @@ grep world hello.txt
 
 | 命令              | 说明          |
 | ----------------- | -------------------  |
-| grep 'foo\|bar'   | 筛选 foo 或者 bar              |
-| grep -E 'foo|bar'   | 筛选 foo 或者 bar              |
+| grep 'foo\\&#124;bar'   | 筛选 foo 或者 bar              |
+| grep -E 'foo&#124;bar'   | 筛选 foo 或者 bar              |
 | grep -A 3 'foo'   | 筛选 foo 及其之后3行的内容              |
 | grep -B 3 'foo'   | 筛选 foo 及其之前3行的内容              |
 | grep -C 3 'foo'   | 筛选 foo 及其前后3行的内容              |
